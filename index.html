@@ -1,6 +1,42 @@
 <!DOCTYPE html>
-<html>
+<meta charset="utf-8">
+<head>
+
+    <script type="text/javascript" src="./lib/d3.v5.min.js"></script>
+    <script type="text/javascript" src="./lib/d3-dsv.min.js"></script>
+    <script type="text/javascript" src="./lib/d3-legend.min.js"></script>
+    <script type="text/javascript" src="./lib/d3-tip.min.js"></script>
+    <script type="text/javascript" src="./lib/d3-geo-projection.v2.min.js"></script>
+    <script type="text/javascript" src="./lib/topojson.v2.min.js"></script>
+
+    <style>
+
+
+    </style>
+
+    <title></title>
+</head>
+
+
 <body>
-<h1>Test</h1>
+
+<script>
+
+    var width = 700
+    var height = 1400
+
+    var svg = d3.select("body").append("svg").attr("id", "choropleth")
+        .attr("preserveAspectRatio", "xMinYMin meet")//.style("background-color", "#c9e8fd") adds blue background
+        .attr("viewBox", "0 0 " + width + " " + height)
+        .classed("svg-content", true);
+
+    var projection = d3.geoNaturalEarth();
+    var path = d3.geoPath().projection(projection);
+
+    var chicagomap = d3.json("boundaries_chicago_census_neighborhoods.geojson")
+
+</script>
+
 </body>
+
 </html>
