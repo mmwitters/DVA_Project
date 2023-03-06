@@ -25,15 +25,33 @@
     var width = 700
     var height = 1400
 
+    var chicagomap = d3.json("boundaries_chicago_census_neighborhoods.geojson")
+
     var svg = d3.select("body").append("svg").attr("id", "choropleth")
         .attr("preserveAspectRatio", "xMinYMin meet")//.style("background-color", "#c9e8fd") adds blue background
         .attr("viewBox", "0 0 " + width + " " + height)
         .classed("svg-content", true);
 
-    var projection = d3.geoNaturalEarth();
+    var projection = d3.geoMercator().fitSize([width, height], chicagomap);
+
     var path = d3.geoPath().projection(projection);
 
-    var chicagomap = d3.json("boundaries_chicago_census_neighborhoods.geojson")
+
+    Promise.resolve((chicagomap).then(function (chi_map) {
+
+        var neighborhoods = svg.append("g")
+
+        neighborhoods.selectAll('path')
+            .data(chi_map.features)
+            .enter()
+            .append('path')
+            .attr('d', path)
+            .style("fill", "red")
+            .style("stroke-width", "1")
+            .style("stroke", "black");
+
+    }));
+
 
 </script>
 
