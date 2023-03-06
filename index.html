@@ -38,10 +38,16 @@
 
     var path = d3.geoPath().projection(projection);
 
+    var tip = d3.tip().attr('class', 'd3-tip').attr("id", "tooltip").html(function (d) {
+        //console.log(d)
+        return 'Test';
+    });
 
     Promise.resolve((chicagomap).then(function (chi_map) {
 
         var neighborhoods = svg.append("g")
+
+        svg.call(tip)
 
         neighborhoods.selectAll('path')
             .data(chi_map.features)
@@ -50,9 +56,25 @@
             .attr('d', path)
             .style("fill", "teal")
             .style("stroke-width", "0.6")
-            .style("stroke", "black");
+            .style("stroke", "black")
+            .on('mouseover', function (d) {
+                    tip.show(chi_map);
 
-    }));
+                    d3.select(this)
+                        .style("opacity", 1) //TODO remove opacity changes
+                        .style("stroke", "white")
+                        .style("stroke-width", 3);
+                })
+                .on('mouseout', function (d) {
+                    tip.hide(d);
+
+                    d3.select(this)
+                        .style("opacity", 1)
+                        .style("stroke", "black")
+                        .style("stroke-width", 0.6);
+                });
+
+    }))
 
     //TODO fix styling: https://stackoverflow.com/questions/46327421/why-is-this-topojson-rendered-so-small-with-d3-simple-example
 
