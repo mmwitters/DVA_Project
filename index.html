@@ -39,7 +39,7 @@
     var path = d3.geoPath().projection(projection);
 
     var tip = d3.tip().html(function (d) {
-        console.log(d.properties)
+        //console.log(d.properties)
         return d.properties.pri_neigh;
     });
 
@@ -66,9 +66,9 @@
                         .style("stroke-width", 3);
                 })
                 .on('mouseout', function (d) {
-                    tip.hide(d);
+                    tip.hide(d); //TODO make function call consistent
 
-                    d3.select(this)
+                    d3.select(this) //TODO try to select borders of neighborhood too ?
                         .style("opacity", 1)
                         .style("stroke", "black")
                         .style("stroke-width", 0.6);
