@@ -51,16 +51,17 @@
             ;
         });
 
-    Promise.resolve((chicagomap).then(function (chi_map) {
-        console.log(chi_map.features)
-
-        console.log(d3.min(chi_map.features, function(d) { return d.properties.namelsad10;}))
+    chicagomap.then(function (chi_map) {
 
         var neighborhoods = svg.append("g")
 
         var colorscale = d3.scaleQuantile()
-            .domain([d3.min(chi_map.features, function(d) { return d.properties.namelsad10;}), d3.max(chi_map.features, function(d) { return d.properties.namelsad10;})])
-            .range(["#eff3ff", "#bdd7e7", "#6baed6", "#2171b5"]); //TODO finish implementation of colors
+            .domain([d3.min(chi_map.features, function (d) {
+                return d.properties.name10;
+            }), d3.max(chi_map.features, function (d) {
+                return d.properties.name10;
+            })])
+            .range(["#eff3ff", "#bdd7e7", "#6baed6", "#2171b5"]);
 
         svg.call(tip)
 
@@ -69,7 +70,9 @@
             .enter()
             .append('path')
             .attr('d', path)
-            .style("fill", "teal")
+            .style("fill", d => {
+                return colorscale(d.properties.name10);
+            })
             .style("stroke-width", 0.3)
             .style("stroke", "white")
             .on('mouseover', function (d) {
@@ -89,8 +92,7 @@
                     .style("stroke-width", 0.3);
             });
 
-    }))
-
+    })
 
 </script>
 
