@@ -55,6 +55,10 @@
 
         var neighborhoods = svg.append("g")
 
+        // var colorscale = d3.scaleQuantile()
+        //     .domain([d3.min(chi_map.features.properties.namelsad10), d3.max(chi_map.features.properties.namelsad10)])
+        //     .range(["#fee5d9", "#fcae91", "#fb6a4a", "#cb181d"]); //TODO finish implementation of colors
+
         svg.call(tip)
 
         neighborhoods.selectAll('path')
