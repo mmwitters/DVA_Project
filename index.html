@@ -49,8 +49,8 @@
         .style("border-radius", "5px")
         .style("padding", "10px")
         .html(function (d) {
-            console.log(d.properties)
-            return d.properties.pri_neigh + '<br>' + d.properties.namelsad10 + '<br>' + 'GeoID: ' + d.properties.geoid10;
+            //console.log(d.properties)
+            return 'GeoID: ' + d.properties.geoid10;
             ;
         });
 
@@ -95,7 +95,31 @@
                     .style("stroke-width", 0.3);
             });
 
-        //Object.keys(chi_map.features[0].properties)
+        var attributes = Object.keys(chi_map.features[0].properties)
+
+        d3.select("#colorDropdown")
+            .selectAll('attributes')
+            .data(attributes)
+            .enter()
+            .append('option')
+            .text(function (d) {
+                return d;
+            })
+            .attr("value", function (d) {
+                return d;
+            })
+
+        d3.select("#tooltipDropdown")
+            .selectAll('attributes')
+            .data(attributes)
+            .enter()
+            .append('option')
+            .text(function (d) {
+                return d;
+            })
+            .attr("value", function (d) {
+                return d;
+            })
 
 
     })
