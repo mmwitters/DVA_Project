@@ -50,8 +50,8 @@
         .style("padding", "10px")
         .html(function ([d, selected_tooltip]) {
             //console.log(d.properties)
-            console.log(selected_tooltip)
-            return Object.keys(d.properties[selected_tooltip]) + d.properties[selected_tooltip]; //TODO: include name in tooltip
+            //console.log(selected_tooltip)
+            return selected_tooltip + ": " + d.properties[selected_tooltip];
             ;
         });
 
@@ -153,6 +153,9 @@
         })
 
     })
+
+    //TODO: add legend for map ?
+    //TODO: user check -- see what data appears funky on map
 
 </script>
 
