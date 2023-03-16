@@ -48,13 +48,16 @@
         .style("border-width", "1px")
         .style("border-radius", "5px")
         .style("padding", "10px")
-        .html(function (d) {
+        .html(function ([d, selected_tooltip]) {
             //console.log(d.properties)
-            return 'GeoID: ' + d.properties.geoid10;
+            console.log(selected_tooltip)
+            return 'GeoID: ' + d.properties[selected_tooltip]; // TODO: fix tooltip so that it reflects selected data
             ;
         });
 
     chicagomap.then(function (chi_map) {
+
+        var selected_tooltip = "geoid10"
 
         var neighborhoods = svg.append("g")
 
@@ -79,7 +82,7 @@
             .style("stroke-width", 0.3)
             .style("stroke", "white")
             .on('mouseover', function (d) {
-                tip.show(d);
+                tip.show([d, selected_tooltip]);
 
                 d3.select(this)
                     .style("opacity", 1)
@@ -87,7 +90,7 @@
                     .style("stroke-width", 3);
             })
             .on('mouseout', function (d) {
-                tip.hide(d);
+                tip.hide();
 
                 d3.select(this)
                     .style("opacity", 1)
