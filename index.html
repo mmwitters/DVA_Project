@@ -28,7 +28,7 @@
     var width = 700
     var height = 1400
 
-    var chicagomap = d3.json("boundaries_chicago_census_neighborhoods.geojson")
+    var chicagomap = d3.json("big_dataset_FINAL.geojson")
 
     var svg = d3.select("body").append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
@@ -49,7 +49,7 @@
         .style("border-radius", "5px")
         .style("padding", "10px")
         .html(function (d) {
-            //console.log(d.properties)
+            console.log(d.properties)
             return d.properties.pri_neigh + '<br>' + d.properties.namelsad10 + '<br>' + 'GeoID: ' + d.properties.geoid10;
             ;
         });
@@ -60,9 +60,9 @@
 
         var colorscale = d3.scaleQuantile()
             .domain([d3.min(chi_map.features, function (d) {
-                return d.properties.name10;
+                return d.properties.geoid10;
             }), d3.max(chi_map.features, function (d) {
-                return d.properties.name10;
+                return d.properties.geoid10;
             })])
             .range(["#eff3ff", "#bdd7e7", "#6baed6", "#2171b5"]);
 
@@ -74,7 +74,7 @@
             .append('path')
             .attr('d', path)
             .style("fill", d => {
-                return colorscale(d.properties.name10);
+                return colorscale(d.properties.geoid10);
             })
             .style("stroke-width", 0.3)
             .style("stroke", "white")
@@ -94,6 +94,9 @@
                     .style("stroke", "white")
                     .style("stroke-width", 0.3);
             });
+
+        //Object.keys(chi_map.features[0].properties)
+
 
     })
 
