@@ -51,35 +51,38 @@
         .html(function ([d, selected_tooltip]) {
             //console.log(d.properties)
             console.log(selected_tooltip)
-            return 'GeoID: ' + d.properties[selected_tooltip];
+            return Object.keys(d.properties[selected_tooltip]) + d.properties[selected_tooltip]; //TODO: include name in tooltip
             ;
         });
 
-    chicagomap.then(function (chi_map) {
+    var colorscale = null;
 
-        var selected_tooltip = "geoid10"
+
+    chicagomap.then(function (chi_map) {
 
         var selected_color = "geoid10"
 
-        var neighborhoods = svg.append("g")
-
-        var colorscale = d3.scaleQuantile()
+        colorscale = d3.scaleQuantile()
             .domain([d3.min(chi_map.features, function (d) {
-                return d.properties.geoid10;
+                return d.properties[selected_color];
             }), d3.max(chi_map.features, function (d) {
-                return d.properties.geoid10;
+                return d.properties[selected_color];
             })])
             .range(["#eff3ff", "#bdd7e7", "#6baed6", "#2171b5"]);
 
+        var selected_tooltip = "geoid10"
+
+        var neighborhoods = svg.append("g")
+
         svg.call(tip)
 
-        neighborhoods.selectAll('path')
+        var map = neighborhoods.selectAll('path')
             .data(chi_map.features)
             .enter()
             .append('path')
             .attr('d', path)
             .style("fill", d => {
-                return colorscale(d.properties[selected_color]); // TODO: fix colorscale
+                return colorscale(d.properties[selected_color]);
             })
             .style("stroke-width", 0.3)
             .style("stroke", "white")
@@ -128,7 +131,19 @@
 
         d3.select("#colorDropdown").on("change", function (d) {
             selected_color = d3.select(this).property("value")
-            console.log(selected_color)
+            //console.log(selected_color)
+
+            colorscale = d3.scaleQuantile()
+                .domain([d3.min(chi_map.features, function (d) {
+                    return d.properties[selected_color];
+                }), d3.max(chi_map.features, function (d) {
+                    return d.properties[selected_color];
+                })])
+                .range(["#eff3ff", "#bdd7e7", "#6baed6", "#2171b5"]);
+
+            map.style("fill", d => {
+                return colorscale(d.properties[selected_color]);
+            })
         })
 
         d3.select("#tooltipDropdown").on("change", function (d) {
