@@ -51,13 +51,15 @@
         .html(function ([d, selected_tooltip]) {
             //console.log(d.properties)
             console.log(selected_tooltip)
-            return 'GeoID: ' + d.properties[selected_tooltip]; // TODO: fix tooltip so that it reflects selected data
+            return 'GeoID: ' + d.properties[selected_tooltip];
             ;
         });
 
     chicagomap.then(function (chi_map) {
 
         var selected_tooltip = "geoid10"
+
+        var selected_color = "geoid10"
 
         var neighborhoods = svg.append("g")
 
@@ -77,7 +79,7 @@
             .append('path')
             .attr('d', path)
             .style("fill", d => {
-                return colorscale(d.properties.geoid10);
+                return colorscale(d.properties[selected_color]); // TODO: fix colorscale
             })
             .style("stroke-width", 0.3)
             .style("stroke", "white")
@@ -125,13 +127,14 @@
             })
 
         d3.select("#colorDropdown").on("change", function (d) {
-            var selected_color = d3.select(this).property("value")
-            //console.log(selected_color)
+            selected_color = d3.select(this).property("value")
+            console.log(selected_color)
         })
 
         d3.select("#tooltipDropdown").on("change", function (d) {
-            var selected_tooltip = d3.select(this).property("value")
-            console.log(selected_tooltip)
+            selected_tooltip = d3.select(this).property("value")
+            //svg.call(tip)
+            //console.log(selected_tooltip)
         })
 
     })
