@@ -68,7 +68,7 @@
             }), d3.max(chi_map.features, function (d) {
                 return d.properties[selected_color];
             })])
-            .range(["#eff3ff", "#bdd7e7", "#6baed6", "#2171b5"]);
+            .range(["#eff3ff", "#c6dbef","#9ecae1","#6baed6","#4292c6","#2171b5","#084594"]);
 
         var selected_tooltip = "geoid10"
 
@@ -139,7 +139,7 @@
                 }), d3.max(chi_map.features, function (d) {
                     return d.properties[selected_color];
                 })])
-                .range(["#eff3ff", "#bdd7e7", "#6baed6", "#2171b5"]);
+                .range(["#eff3ff", "#c6dbef","#9ecae1","#6baed6","#4292c6","#2171b5","#084594"]);
 
             map.style("fill", d => {
                 return colorscale(d.properties[selected_color]);
