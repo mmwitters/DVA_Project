@@ -60,7 +60,7 @@
 
     chicagomap.then(function (chi_map) {
 
-        var selected_color = "geoid10"
+        var selected_color = "Full Census Tract"
 
         colorscale = d3.scaleQuantile()
             .domain([d3.min(chi_map.features, function (d) {
@@ -70,7 +70,7 @@
             })])
             .range(["#eff3ff", "#c6dbef","#9ecae1","#6baed6","#4292c6","#2171b5","#084594"]);
 
-        var selected_tooltip = "geoid10"
+        var selected_tooltip = "Full Census Tract"
 
         var neighborhoods = svg.append("g")
 
@@ -155,8 +155,9 @@
     })
 
     //TODO: add legend for map ?
+    //TODO: implement percentage symbol in tooltip
     //TODO: user check -- see what data appears funky on map
-    //
+    //TODO: implement line charts
 
 </script>
 
