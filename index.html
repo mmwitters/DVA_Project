@@ -162,6 +162,8 @@
 <select id="censusDropdown"></select>
 <select id="varDropdown"></select>
 <script>
+
+    var margin = {top: 20, right: 30, bottom: 30, left: 40}
     var w = 960
     var h = 500
 
@@ -210,6 +212,23 @@
             .attr("value", function (d) {
                 return d;
             })
+
+        var xScale = d3.scaleTime()
+            .domain(years)
+            .range([0, w - margin.left - margin.right]);
+
+        var yScale = d3.scaleLinear()
+            //.domain([0, d3.max(selected_data)]) //TODO: define var called selected data (from drop-downs)
+            .range([h - margin.top - margin.bottom, 0]);
+
+        var yaxis = d3.axisLeft()
+            .ticks(9)
+            .scale(yScale);
+
+        var xaxis = d3.axisBottom()
+            .ticks(d3.timeYear.every(1))
+            .tickFormat(d3.timeFormat('%Y'))
+            .scale(xScale);
     })
 
 
