@@ -51,7 +51,11 @@
         .html(function ([d, selected_tooltip]) {
             //console.log(d.properties)
             //console.log(selected_tooltip)
-            return selected_tooltip + ": " + d.properties[selected_tooltip];
+            var selected_data = d.properties[selected_tooltip]
+            if (Number.isInteger(selected_data)){
+                return selected_tooltip + ": " + selected_data;
+            }
+            return selected_tooltip + ": " + selected_data + "%";
             ;
         });
 
@@ -155,7 +159,6 @@
     })
 
     //TODO: add legend for map ?
-    //TODO: implement percentage symbol in tooltip
     //TODO: user check -- see what data appears funky on map
     //TODO: implement line charts
 
