@@ -49,10 +49,8 @@
         .style("border-radius", "5px")
         .style("padding", "10px")
         .html(function ([d, selected_tooltip]) {
-            //console.log(d.properties)
-            //console.log(selected_tooltip)
             var selected_data = d.properties[selected_tooltip]
-            if (Number.isInteger(selected_data)){
+            if (Number.isInteger(selected_data)) {
                 return selected_tooltip + ": " + selected_data;
             }
             return selected_tooltip + ": " + selected_data + "%";
@@ -72,7 +70,7 @@
             }), d3.max(chi_map.features, function (d) {
                 return d.properties[selected_color];
             })])
-            .range(["#eff3ff", "#c6dbef","#9ecae1","#6baed6","#4292c6","#2171b5","#084594"]);
+            .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]);
 
         var selected_tooltip = "Full Census Tract"
 
@@ -143,10 +141,11 @@
                 }), d3.max(chi_map.features, function (d) {
                     return d.properties[selected_color];
                 })])
-                .range(["#eff3ff", "#c6dbef","#9ecae1","#6baed6","#4292c6","#2171b5","#084594"]);
+                .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]);
 
             map.style("fill", d => {
                 return colorscale(d.properties[selected_color]);
+
             })
         })
 
@@ -158,7 +157,6 @@
 
     })
 
-    //TODO: add legend for map ?
     //TODO: user check -- see what data appears funky on map
     //TODO: implement line charts
 
