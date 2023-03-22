@@ -213,6 +213,20 @@
                 return d;
             })
 
+        var selected_census = '17031010100'
+
+        var selected_var = 'Total Weighted Population'
+
+        d3.select("#censusDropdown").on("change", function (d) {
+            selected_census = d3.select(this).property("value")
+            //console.log(selected_census)
+        })
+
+        d3.select("#varDropdown").on("change", function (d) {
+            selected_var = d3.select(this).property("value")
+            //console.log(selected_var)
+        })
+
         var xScale = d3.scaleTime()
             .domain(years)
             .range([0, w - margin.left - margin.right]);
@@ -230,7 +244,6 @@
             .tickFormat(d3.timeFormat('%Y'))
             .scale(xScale);
     })
-
 
     //TODO: remove unwanted data from map (e.g. Year)
     //TODO: add labels to drop-downs ?
