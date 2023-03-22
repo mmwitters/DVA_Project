@@ -177,7 +177,11 @@
         let censusTracts = Array.from(new Set(data.map(function (d) {
             return d['Census Tract']
         })));
-        console.log(censusTracts)
+        //console.log(censusTracts)
+
+        let variables = data.columns.slice(3)
+
+        //console.log(variables)
 
         d3.select("#censusDropdown")
             .selectAll('attributes')
@@ -190,11 +194,22 @@
             .attr("value", function (d) {
                 return d;
             })
+
+        d3.select("#varDropdown")
+            .selectAll('attributes')
+            .data(variables)
+            .enter()
+            .append('option')
+            .text(function (d) {
+                return d;
+            })
+            .attr("value", function (d) {
+                return d;
+            })
     })
 
 
     //TODO: remove unwanted data from map (e.g. Year)
-    //TODO: fix aspect ratio on map
     //TODO: implement line charts
 
 </script>
