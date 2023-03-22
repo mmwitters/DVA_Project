@@ -174,10 +174,22 @@
         .attr("height", h);
 
     sdoh.then(data => {
-        let censusTracts = new Set(data.map(function (d) {
+        let censusTracts = Array.from(new Set(data.map(function (d) {
             return d['Census Tract']
-        }));
+        })));
         console.log(censusTracts)
+
+        d3.select("#censusDropdown")
+            .selectAll('attributes')
+            .data(censusTracts)
+            .enter()
+            .append('option')
+            .text(function (d) {
+                return d;
+            })
+            .attr("value", function (d) {
+                return d;
+            })
     })
 
 
