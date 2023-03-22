@@ -181,7 +181,11 @@
 
         let variables = data.columns.slice(3)
 
-        //console.log(variables)
+        let years = Array.from(new Set(data.map(function (d) {
+            return d['Year']
+        })));
+
+        //console.log(years)
 
         d3.select("#censusDropdown")
             .selectAll('attributes')
