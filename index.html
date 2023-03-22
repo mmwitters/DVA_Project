@@ -217,14 +217,17 @@
 
         var selected_var = 'Total Weighted Population'
 
-        var selected_data = data.filter(function (d) {
+        var data_subset = data.filter(function (d) {
             return d['Census Tract'] === selected_census
         })
-        console.log(selected_data) //TODO: need to filter next on selected variable
+        console.log(data_subset)
+
+        var selected_data = data_subset.map(d => d[selected_var])
+        console.log(selected_data)
 
         d3.select("#censusDropdown").on("change", function (d) {
             selected_census = d3.select(this).property("value")
-            //console.log(selected_census)
+            //console.log(selected_census) #TODO: dynamically change selected_data with drop-downs
         })
 
         d3.select("#varDropdown").on("change", function (d) {
