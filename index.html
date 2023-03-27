@@ -228,6 +228,8 @@
         })
         //console.log(data_subset)
 
+        var selected_years = data_subset.map(d => d['Year'])
+        console.log(selected_years)
         var selected_data = data_subset.map(d => d[selected_var])
 
         //console.log(selected_data)
@@ -236,9 +238,11 @@
             selected_census = d3.select(this).property("value")
             //console.log(selected_census)
             data_subset = data.filter(function (d) {
-            return d['Census Tract'] === selected_census
-        })
+                return d['Census Tract'] === selected_census
+            })
+            selected_years = data_subset.map(d => d['Year'])
             //console.log(data_subset)
+            //console.log(selected_years)
             selected_data = data_subset.map(d => d[selected_var])
             //console.log(selected_data)
         })
@@ -247,9 +251,11 @@
             selected_var = d3.select(this).property("value")
             //console.log(selected_var)
             data_subset = data.filter(function (d) {
-            return d['Census Tract'] === selected_census
-        })
+                return d['Census Tract'] === selected_census
+            })
             //console.log(data_subset)
+            selected_years = data_subset.map(d => d['Year'])
+            //console.log(selected_years)
             selected_data = data_subset.map(d => d[selected_var])
             //console.log(selected_data)
         })
@@ -259,7 +265,7 @@
             .range([0, w - margin.left - margin.right]);
 
         var yScale = d3.scaleLinear()
-            //.domain([0, d3.max(selected_data)])
+            .domain([d3.min(selected_data), d3.max(selected_data)])
             .range([h - margin.top - margin.bottom, 0]);
 
         var yaxis = d3.axisLeft()
@@ -270,6 +276,11 @@
             .ticks(d3.timeYear.every(1))
             .tickFormat(d3.timeFormat('%Y'))
             .scale(xScale);
+
+        var line = d3.line()
+            .x(xScale(selected_years))
+            .y(yScale(selected_data));
+
     })
 
     //TODO: add labels to drop-downs ?
