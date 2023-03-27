@@ -48,7 +48,7 @@
         .style("border-width", "1px")
         .style("border-radius", "5px")
         .style("padding", "10px")
-        .html(function ([d, selected_tooltip]) {
+        .html(function ([d, selected_tooltip]) { //TODO: fix this -- only add to PoP variables
             var selected_data = d.properties[selected_tooltip]
             if (Number.isInteger(selected_data)) {
                 return selected_tooltip + ": " + selected_data;
@@ -110,7 +110,7 @@
         attributes.pop() //removing Gentrification Status from drop-down
 
         var year_ind = attributes.indexOf('Year') //removing Year from drop-down and shading
-        console.log(year_ind)
+        //console.log(year_ind)
         attributes.splice(year_ind, 1)
 
         d3.select("#colorDropdown")
@@ -226,19 +226,32 @@
         var data_subset = data.filter(function (d) {
             return d['Census Tract'] === selected_census
         })
-        console.log(data_subset)
+        //console.log(data_subset)
 
         var selected_data = data_subset.map(d => d[selected_var])
-        console.log(selected_data)
+
+        //console.log(selected_data)
 
         d3.select("#censusDropdown").on("change", function (d) {
             selected_census = d3.select(this).property("value")
-            //console.log(selected_census) #TODO: dynamically change selected_data with drop-downs
+            //console.log(selected_census)
+            data_subset = data.filter(function (d) {
+            return d['Census Tract'] === selected_census
+        })
+            //console.log(data_subset)
+            selected_data = data_subset.map(d => d[selected_var])
+            //console.log(selected_data)
         })
 
         d3.select("#varDropdown").on("change", function (d) {
             selected_var = d3.select(this).property("value")
             //console.log(selected_var)
+            data_subset = data.filter(function (d) {
+            return d['Census Tract'] === selected_census
+        })
+            //console.log(data_subset)
+            selected_data = data_subset.map(d => d[selected_var])
+            //console.log(selected_data)
         })
 
         var xScale = d3.scaleTime()
@@ -246,7 +259,7 @@
             .range([0, w - margin.left - margin.right]);
 
         var yScale = d3.scaleLinear()
-            //.domain([0, d3.max(selected_data)]) //TODO: define var called selected data (from drop-downs)
+            //.domain([0, d3.max(selected_data)])
             .range([h - margin.top - margin.bottom, 0]);
 
         var yaxis = d3.axisLeft()
@@ -259,7 +272,6 @@
             .scale(xScale);
     })
 
-    //TODO: remove unwanted data from map (e.g. Year)
     //TODO: add labels to drop-downs ?
     //TODO: implement line charts
     //TODO: message Brittany about revised dataset
