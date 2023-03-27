@@ -236,34 +236,10 @@
 
         //console.log(selected_data)
 
-        d3.select("#censusDropdown").on("change", function (d) {
-            selected_census = d3.select(this).property("value")
-            //console.log(selected_census)
-            data_subset = data.filter(function (d) {
-                return d['Census Tract'] === selected_census
-            })
-            selected_years = data_subset.map(d => d['Year'])
-            //console.log(data_subset)
-            //console.log(selected_years)
-            selected_data = data_subset.map(d => d[selected_var])
-            //console.log(selected_data)
-        })
-
-        d3.select("#varDropdown").on("change", function (d) {
-            selected_var = d3.select(this).property("value")
-            //console.log(selected_var)
-            data_subset = data.filter(function (d) {
-                return d['Census Tract'] === selected_census
-            })
-            //console.log(data_subset)
-            selected_years = data_subset.map(d => d['Year'])
-            //console.log(selected_years)
-            selected_data = data_subset.map(d => d[selected_var])
-            //console.log(selected_data)
-        })
-
         var xScale = d3.scaleTime()
-            .domain(d3.extent(selected_years, function(d) { return d3.timeParse("%Y")(d); }))
+            .domain(d3.extent(selected_years, function (d) {
+                return d3.timeParse("%Y")(d);
+            }))
             .range([0, w - margin.left - margin.right]);
 
         var yScale = d3.scaleLinear()
@@ -279,20 +255,110 @@
             .tickFormat(d3.timeFormat('%Y'))
             .scale(xScale);
 
-        var line = d3.line()
+        var line = d3.line() //TODO: finish implementing line and make it change
             .x(xScale(selected_years))
             .y(yScale(selected_data));
 
         var x_axis = svg2.append("g")
-            .attr("class", "axis")
-            .attr("id", "x-axis-a")
+            .attr("class", "x-axis")
             .attr("transform", `translate(${margin.left}, ${(h - margin.bottom)})`)
             .call(xaxis);
 
         var y_axis = svg2.append("g")
-            .attr("id", "y-axis-a")
+            .attr("class", "y-axis")
             .attr("transform", `translate(${margin.left}, ${(margin.top)})`)
             .call(yaxis);
+
+
+        d3.select("#censusDropdown").on("change", function (d) {
+            selected_census = d3.select(this).property("value")
+            //console.log(selected_census)
+            data_subset = data.filter(function (d) {
+                return d['Census Tract'] === selected_census
+            })
+            selected_years = data_subset.map(d => d['Year'])
+            //console.log(data_subset)
+            //console.log(selected_years)
+            selected_data = data_subset.map(d => d[selected_var])
+            //console.log(selected_data)
+
+            xScale = d3.scaleTime()
+                .domain(d3.extent(selected_years, function (d) {
+                    return d3.timeParse("%Y")(d);
+                }))
+                .range([0, w - margin.left - margin.right]);
+
+            yScale = d3.scaleLinear()
+                .domain([d3.min(selected_data), d3.max(selected_data)])
+                .range([h - margin.top - margin.bottom, 0]);
+
+            yaxis = d3.axisLeft()
+                .ticks(9)
+                .scale(yScale);
+
+            xaxis = d3.axisBottom()
+                .ticks(d3.timeYear.every(1))
+                .tickFormat(d3.timeFormat('%Y'))
+                .scale(xScale);
+
+            d3.select(".x-axis").remove()
+            d3.select(".y-axis").remove()
+
+            x_axis = svg2.append("g")
+            .attr("class", "x-axis")
+            .attr("transform", `translate(${margin.left}, ${(h - margin.bottom)})`)
+            .call(xaxis);
+
+            y_axis = svg2.append("g")
+            .attr("class", "y-axis")
+            .attr("transform", `translate(${margin.left}, ${(margin.top)})`)
+            .call(yaxis);
+        })
+
+        d3.select("#varDropdown").on("change", function (d) {
+            selected_var = d3.select(this).property("value")
+            //console.log(selected_var)
+            data_subset = data.filter(function (d) {
+                return d['Census Tract'] === selected_census
+            })
+            //console.log(data_subset)
+            selected_years = data_subset.map(d => d['Year'])
+            //console.log(selected_years)
+            selected_data = data_subset.map(d => d[selected_var])
+            //console.log(selected_data)
+
+            xScale = d3.scaleTime()
+                .domain(d3.extent(selected_years, function (d) {
+                    return d3.timeParse("%Y")(d);
+                }))
+                .range([0, w - margin.left - margin.right]);
+
+            yScale = d3.scaleLinear()
+                .domain([d3.min(selected_data), d3.max(selected_data)])
+                .range([h - margin.top - margin.bottom, 0]);
+
+            yaxis = d3.axisLeft()
+                .ticks(9)
+                .scale(yScale);
+
+            xaxis = d3.axisBottom()
+                .ticks(d3.timeYear.every(1))
+                .tickFormat(d3.timeFormat('%Y'))
+                .scale(xScale);
+
+            d3.select(".x-axis").remove()
+            d3.select(".y-axis").remove()
+
+            x_axis = svg2.append("g")
+            .attr("class", "x-axis")
+            .attr("transform", `translate(${margin.left}, ${(h - margin.bottom)})`)
+            .call(xaxis);
+
+            y_axis = svg2.append("g")
+            .attr("class", "y-axis")
+            .attr("transform", `translate(${margin.left}, ${(margin.top)})`)
+            .call(yaxis);
+        })
 
     })
 
