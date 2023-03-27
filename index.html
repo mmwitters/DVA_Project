@@ -269,6 +269,20 @@
             .attr("transform", `translate(${margin.left}, ${(margin.top)})`)
             .call(yaxis);
 
+        svg.append("path")
+            .datum(data_subset) //TODO: read documentation and fix the line path
+            .attr("fill", "none")
+            .attr("stroke", "steelblue")
+            .attr("stroke-width", 1.5)
+            .attr("d", d3.line()
+                .x(function (d) {
+                    return xScale(d['Year'])
+                })
+                .y(function (d) {
+                    return yScale(d[selected_var])
+                })
+            )
+
 
         d3.select("#censusDropdown").on("change", function (d) {
             selected_census = d3.select(this).property("value")
@@ -305,14 +319,14 @@
             d3.select(".y-axis").remove()
 
             x_axis = svg2.append("g")
-            .attr("class", "x-axis")
-            .attr("transform", `translate(${margin.left}, ${(h - margin.bottom)})`)
-            .call(xaxis);
+                .attr("class", "x-axis")
+                .attr("transform", `translate(${margin.left}, ${(h - margin.bottom)})`)
+                .call(xaxis);
 
             y_axis = svg2.append("g")
-            .attr("class", "y-axis")
-            .attr("transform", `translate(${margin.left}, ${(margin.top)})`)
-            .call(yaxis);
+                .attr("class", "y-axis")
+                .attr("transform", `translate(${margin.left}, ${(margin.top)})`)
+                .call(yaxis);
         })
 
         d3.select("#varDropdown").on("change", function (d) {
@@ -350,14 +364,14 @@
             d3.select(".y-axis").remove()
 
             x_axis = svg2.append("g")
-            .attr("class", "x-axis")
-            .attr("transform", `translate(${margin.left}, ${(h - margin.bottom)})`)
-            .call(xaxis);
+                .attr("class", "x-axis")
+                .attr("transform", `translate(${margin.left}, ${(h - margin.bottom)})`)
+                .call(xaxis);
 
             y_axis = svg2.append("g")
-            .attr("class", "y-axis")
-            .attr("transform", `translate(${margin.left}, ${(margin.top)})`)
-            .call(yaxis);
+                .attr("class", "y-axis")
+                .attr("transform", `translate(${margin.left}, ${(margin.top)})`)
+                .call(yaxis);
         })
 
     })
