@@ -183,9 +183,9 @@
         .attr("height", h);
 
     sdoh.then(data => {
-       data.forEach(d => {
-           d['Year'] = new Date(d['Year'], 0)
-       })
+        data.forEach(d => {
+            d['Year'] = new Date(d['Year'], 0)
+        })
 
         let censusTracts = Array.from(new Set(data.map(function (d) {
             return d['Census Tract']
@@ -224,13 +224,12 @@
         var data_subset = data.filter(function (d) {
             return d['Census Tract'] === selected_census
         })
-        console.log(data_subset)
 
-        var selected_years = data_subset.map(d => d['Year'])
+        //var selected_years = data_subset.map(d => d['Year'])
 
-        console.log(selected_years)
-        var selected_data = data_subset.map(d => d[selected_var])
-        console.log(selected_data)
+        //console.log(selected_years)
+        //var selected_data = data_subset.map(d => d[selected_var])
+        //console.log(selected_data)
 
         //console.log(selected_data)
 
@@ -275,6 +274,7 @@
 
         var line = svg2.append("path")
             .datum(data_subset)
+            .attr("class", "curr-line")
             .attr("fill", "none")
             .attr("stroke", "steelblue")
             .attr("stroke-width", 1.5)
@@ -290,25 +290,35 @@
 
 
         d3.select("#censusDropdown").on("change", function (d) {
-            selected_census = d3.select(this).property("value")
-            //console.log(selected_census)
+            selected_census = parseInt(d3.select(this).property("value"))
+            console.log(selected_census)
             data_subset = data.filter(function (d) {
                 return d['Census Tract'] === selected_census
             })
-            selected_years = data_subset.map(d => d['Year'])
-            //console.log(data_subset)
+            //selected_years = data_subset.map(d => d['Year'])
+            console.log(data_subset)
             //console.log(selected_years)
-            selected_data = data_subset.map(d => d[selected_var])
+            //selected_data = data_subset.map(d => d[selected_var])
             //console.log(selected_data)
 
             xScale = d3.scaleTime()
-                .domain(d3.extent(selected_years, function (d) {
-                    return d3.timeParse("%Y")(d);
-                }))
+                .domain([
+                    d3.min(data_subset, function (d) {
+                        return d['Year'];
+                    }),
+                    d3.max(data_subset, function (d) {
+                        return d['Year'];
+                    })
+                ])
                 .range([0, w - margin.left - margin.right]);
 
             yScale = d3.scaleLinear()
-                .domain([d3.min(selected_data), d3.max(selected_data)])
+                .domain([d3.min(data_subset, function (d) {
+                    return d[selected_var];
+                }),
+                    d3.max(data_subset, function (d) {
+                        return d[selected_var];
+                    })])
                 .range([h - margin.top - margin.bottom, 0]);
 
             yaxis = d3.axisLeft()
@@ -322,6 +332,7 @@
 
             d3.select(".x-axis").remove()
             d3.select(".y-axis").remove()
+            d3.select(".curr-line").remove()
 
             x_axis = svg2.append("g")
                 .attr("class", "x-axis")
@@ -332,6 +343,22 @@
                 .attr("class", "y-axis")
                 .attr("transform", `translate(${margin.left}, ${(margin.top)})`)
                 .call(yaxis);
+
+            line = svg2.append("path")
+                .datum(data_subset)
+                .attr("class", "curr-line")
+                .attr("fill", "none")
+                .attr("stroke", "steelblue")
+                .attr("stroke-width", 1.5)
+                .attr("transform", `translate(${margin.left}, ${(margin.top)})`)
+                .attr("d", d3.line()
+                    .x(function (d) {
+                        return xScale(d['Year'])
+                    })
+                    .y(function (d) {
+                        return yScale(d[selected_var])
+                    })
+                )
         })
 
         d3.select("#varDropdown").on("change", function (d) {
@@ -341,19 +368,29 @@
                 return d['Census Tract'] === selected_census
             })
             //console.log(data_subset)
-            selected_years = data_subset.map(d => d['Year'])
+            //selected_years = data_subset.map(d => d['Year'])
             //console.log(selected_years)
-            selected_data = data_subset.map(d => d[selected_var])
+            //selected_data = data_subset.map(d => d[selected_var])
             //console.log(selected_data)
 
             xScale = d3.scaleTime()
-                .domain(d3.extent(selected_years, function (d) {
-                    return d3.timeParse("%Y")(d);
-                }))
+                .domain([
+                    d3.min(data_subset, function (d) {
+                        return d['Year'];
+                    }),
+                    d3.max(data_subset, function (d) {
+                        return d['Year'];
+                    })
+                ])
                 .range([0, w - margin.left - margin.right]);
 
             yScale = d3.scaleLinear()
-                .domain([d3.min(selected_data), d3.max(selected_data)])
+                .domain([d3.min(data_subset, function (d) {
+                    return d[selected_var];
+                }),
+                    d3.max(data_subset, function (d) {
+                        return d[selected_var];
+                    })])
                 .range([h - margin.top - margin.bottom, 0]);
 
             yaxis = d3.axisLeft()
@@ -367,6 +404,7 @@
 
             d3.select(".x-axis").remove()
             d3.select(".y-axis").remove()
+            d3.select(".curr-line").remove()
 
             x_axis = svg2.append("g")
                 .attr("class", "x-axis")
@@ -377,6 +415,22 @@
                 .attr("class", "y-axis")
                 .attr("transform", `translate(${margin.left}, ${(margin.top)})`)
                 .call(yaxis);
+
+            line = svg2.append("path")
+                .datum(data_subset)
+                .attr("class", "curr-line")
+                .attr("fill", "none")
+                .attr("stroke", "steelblue")
+                .attr("stroke-width", 1.5)
+                .attr("transform", `translate(${margin.left}, ${(margin.top)})`)
+                .attr("d", d3.line()
+                    .x(function (d) {
+                        return xScale(d['Year'])
+                    })
+                    .y(function (d) {
+                        return yScale(d[selected_var])
+                    })
+                )
         })
 
     })
