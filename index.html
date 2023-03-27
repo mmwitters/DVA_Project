@@ -231,6 +231,7 @@
         var selected_years = data_subset.map(d => d['Year'])
         console.log(selected_years)
         var selected_data = data_subset.map(d => d[selected_var])
+        console.log(selected_data)
 
         //console.log(selected_data)
 
@@ -261,7 +262,7 @@
         })
 
         var xScale = d3.scaleTime()
-            .domain(years)
+            .domain([d3.min(selected_years), d3.max(selected_years)])
             .range([0, w - margin.left - margin.right]);
 
         var yScale = d3.scaleLinear()
