@@ -237,13 +237,23 @@
         //console.log(selected_data)
 
         var xScale = d3.scaleTime()
-            .domain(d3.extent(selected_years, function (d) {
-                return d3.timeParse("%Y")(d);
-            }))
+            .domain([
+                d3.min(data_subset, function (d) {
+                    return d['Year'];
+                }),
+                d3.max(data_subset, function (d) {
+                    return d['Year'];
+                })
+            ])
             .range([0, w - margin.left - margin.right]);
 
         var yScale = d3.scaleLinear()
-            .domain([d3.min(selected_data), d3.max(selected_data)])
+            .domain([d3.min(data_subset, function (d) {
+                return d['Total Weighted Population'];
+            }),
+                d3.max(data_subset, function (d) {
+                    return d['Total Weighted Population'];
+                })])
             .range([h - margin.top - margin.bottom, 0]);
 
         var yaxis = d3.axisLeft()
@@ -269,7 +279,7 @@
             .attr("transform", `translate(${margin.left}, ${(margin.top)})`)
             .call(yaxis);
 
-        svg.append("path")
+        svg2.append("path")
             .datum(data_subset) //TODO: read documentation and fix the line path
             .attr("fill", "none")
             .attr("stroke", "steelblue")
@@ -279,7 +289,7 @@
                     return xScale(d['Year'])
                 })
                 .y(function (d) {
-                    return yScale(d[selected_var])
+                    return yScale(d['Total Weighted Population'])
                 })
             )
 
