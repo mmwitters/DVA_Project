@@ -281,6 +281,17 @@
             .x(xScale(selected_years))
             .y(yScale(selected_data));
 
+        var x_axis = svg2.append("g")
+            .attr("class", "axis")
+            .attr("id", "x-axis-a")
+            .attr("transform", `translate(${margin.left + 25}, ${(h - margin.bottom)})`)
+            .call(xaxis);
+
+        var y_axis = svg2.append("g")
+            .attr("id", "y-axis-a")
+            .attr("transform", `translate(${margin.left + 25}, ${(margin.top)})`)
+            .call(yaxis);
+
     })
 
     //TODO: add labels to drop-downs ?
