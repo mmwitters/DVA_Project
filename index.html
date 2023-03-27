@@ -173,7 +173,8 @@
     var w = 960
     var h = 500
 
-    var sdoh = d3.csv("sdoh_2009-2019_final.csv")
+    var sdoh = d3.csv("sdoh_2009-2019_final.csv", d3.autoType);
+    //console.log(sdoh)
 
     var svg2 = d3.select("body")
         .append("svg")
@@ -182,6 +183,10 @@
         .attr("height", h);
 
     sdoh.then(data => {
+       data.forEach(d => {
+           d['Year'] = new Date(d['Year'], 0)
+       })
+
         let censusTracts = Array.from(new Set(data.map(function (d) {
             return d['Census Tract']
         })));
@@ -212,7 +217,7 @@
                 return d;
             })
 
-        var selected_census = '17031010100'
+        var selected_census = 17031010100
 
         var selected_var = 'Total Weighted Population'
 
@@ -269,7 +274,7 @@
             .call(yaxis);
 
         svg2.append("path")
-            .datum(data_subset) //TODO: read documentation and fix the line path
+            .datum(data_subset)
             .attr("fill", "none")
             .attr("stroke", "steelblue")
             .attr("stroke-width", 1.5)
@@ -282,7 +287,6 @@
                     return yScale(d[selected_var])
                 })
             )
-
 
 
         d3.select("#censusDropdown").on("change", function (d) {
