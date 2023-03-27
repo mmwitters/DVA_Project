@@ -28,7 +28,7 @@
     var width = 700
     var height = 600
 
-    var chicagomap = d3.json("big_dataset_final_REV.geojson")
+    var chicagomap = d3.json("big_dataset_final_REV.geojson") //TODO: consider dataset swap ?
 
     var svg = d3.select("body").append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
@@ -106,6 +106,12 @@
             });
 
         var attributes = Object.keys(chi_map.features[0].properties)
+
+        attributes.pop() //removing Gentrification Status from drop-down
+
+        var year_ind = attributes.indexOf('Year') //removing Year from drop-down and shading
+        console.log(year_ind)
+        attributes.splice(year_ind, 1)
 
         d3.select("#colorDropdown")
             .selectAll('attributes')
@@ -256,6 +262,7 @@
     //TODO: remove unwanted data from map (e.g. Year)
     //TODO: add labels to drop-downs ?
     //TODO: implement line charts
+    //TODO: message Brittany about revised dataset
 
 </script>
 
