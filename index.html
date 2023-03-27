@@ -185,15 +185,8 @@
         let censusTracts = Array.from(new Set(data.map(function (d) {
             return d['Census Tract']
         })));
-        //console.log(censusTracts)
 
-        let variables = data.columns.slice(3)
-
-        let years = Array.from(new Set(data.map(function (d) {
-            return d['Year']
-        })));
-
-        //console.log(years)
+        let variables = data.columns.slice(3);
 
         d3.select("#censusDropdown")
             .selectAll('attributes')
