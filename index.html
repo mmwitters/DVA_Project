@@ -226,9 +226,10 @@
         var data_subset = data.filter(function (d) {
             return d['Census Tract'] === selected_census
         })
-        //console.log(data_subset)
+        console.log(data_subset)
 
         var selected_years = data_subset.map(d => d['Year'])
+
         console.log(selected_years)
         var selected_data = data_subset.map(d => d[selected_var])
         console.log(selected_data)
@@ -262,7 +263,7 @@
         })
 
         var xScale = d3.scaleTime()
-            .domain([d3.min(selected_years), d3.max(selected_years)])
+            .domain(d3.extent(selected_years, function(d) { return d3.timeParse("%Y")(d); }))
             .range([0, w - margin.left - margin.right]);
 
         var yScale = d3.scaleLinear()
