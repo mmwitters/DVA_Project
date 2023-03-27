@@ -265,10 +265,6 @@
             .tickFormat(d3.timeFormat('%Y'))
             .scale(xScale);
 
-        var line = d3.line() //TODO: finish implementing line and make it change
-            .x(xScale(selected_years))
-            .y(yScale(selected_data));
-
         var x_axis = svg2.append("g")
             .attr("class", "x-axis")
             .attr("transform", `translate(${margin.left}, ${(h - margin.bottom)})`)
