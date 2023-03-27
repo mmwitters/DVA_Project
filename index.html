@@ -284,14 +284,16 @@
             .attr("fill", "none")
             .attr("stroke", "steelblue")
             .attr("stroke-width", 1.5)
+            .attr("transform", `translate(${margin.left}, ${(margin.top)})`)
             .attr("d", d3.line()
                 .x(function (d) {
                     return xScale(d['Year'])
                 })
                 .y(function (d) {
-                    return yScale(d['Total Weighted Population'])
+                    return yScale(d[selected_var])
                 })
             )
+
 
 
         d3.select("#censusDropdown").on("change", function (d) {
