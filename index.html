@@ -247,10 +247,10 @@
 
         var yScale = d3.scaleLinear()
             .domain([d3.min(data_subset, function (d) {
-                return d['Total Weighted Population'];
+                return d[selected_var];
             }),
                 d3.max(data_subset, function (d) {
-                    return d['Total Weighted Population'];
+                    return d[selected_var];
                 })])
             .range([h - margin.top - margin.bottom, 0]);
 
@@ -273,7 +273,7 @@
             .attr("transform", `translate(${margin.left}, ${(margin.top)})`)
             .call(yaxis);
 
-        svg2.append("path")
+        var line = svg2.append("path")
             .datum(data_subset)
             .attr("fill", "none")
             .attr("stroke", "steelblue")
