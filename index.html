@@ -305,13 +305,35 @@
                 .on("mouseover", mouseover)
                 .on("mouseout", mouseout);
 
+            var min_tip = d3.tip()
+                .style("position", "absolute")
+                .style("background-color", "white")
+                .style("border", "solid")
+                .style("border-width", "1px")
+                .style("border-radius", "5px")
+                .style("padding", "10px")
+                .html(function (selected_display) { //TODO: fix this -- only add to PoP variables
+                    if (Number.isInteger(selected_display)) {
+                        return selected_display;
+                    }
+                    return selected_display + "%";
+                    ;
+                });
 
-            function mouseover(d){
+            var selected_display = ""
+
+            svg2.call(min_tip)
+
+            function mouseover(d) {
+                //console.log(d3.select(this)._groups[0][0].__data__[selected_var])
+                selected_display = d3.select(this)._groups[0][0].__data__[selected_var]
                 d3.select(this).attr("r", 9)
+                min_tip.show(selected_display)
             }
+
             function mouseout(d) {
-                //console.log(d3.select(this))
                 d3.select(this).attr("r", 4)
+                min_tip.hide()
 
             };
 
