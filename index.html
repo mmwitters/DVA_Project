@@ -196,6 +196,20 @@
 
         let variables = data.columns.slice(3);
 
+        variables.splice(variables.length - 3, 3);
+
+        var med_ind = variables.indexOf("Medically Underserved Areas")
+        variables.splice(med_ind, 1)
+
+        var pri_ind = variables.indexOf("Primary Rural-Urban Commuting Area Code 2000")
+        variables.splice(pri_ind, 1)
+
+        var sec_ind = variables.indexOf("Secondary Rural-Urban Commuting Area Code 2010")
+        variables.splice(sec_ind, 1)
+
+        var la_ind = variables.indexOf("Land Area in Square Miles")
+        variables.splice(la_ind, 1)
+
         d3.select("#censusDropdown")
             .selectAll('attributes')
             .data(censusTracts)
@@ -381,7 +395,6 @@
 
     })
 
-    //TODO: remove last 5-6 variables from line charts (ones where data is missing) ?
     //TODO: complete some UX checks: ensure everything works for various drop-downs
     //TODO: message Brittany about revised dataset
 
