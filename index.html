@@ -28,7 +28,7 @@
     var width = 700
     var height = 600
 
-    var chicagomap = d3.json("big_dataset_final_REV.geojson") //TODO: consider dataset swap ?
+    var chicagomap = d3.json("big_dataset_final_REV.geojson")
 
     var svg = d3.select("body").append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
@@ -50,10 +50,12 @@
         .style("padding", "10px")
         .html(function ([d, selected_tooltip]) { //TODO: fix this -- only add to PoP variables
             var selected_data = d.properties[selected_tooltip]
-            if (Number.isInteger(selected_data)) {
-                return selected_tooltip + ": " + selected_data;
+            if (selected_tooltip.includes("PoP") || selected_tooltip.includes("PoEP") || selected_tooltip.includes("PoH")
+            || selected_tooltip.includes("PHU") || selected_tooltip.includes("POHU") || selected_tooltip.includes("PoW")
+            || selected_tooltip.includes("PoF") || selected_tooltip.includes("Percent") || selected_tooltip.includes("Crime")) {
+                return selected_tooltip + ": " + selected_data + "%";
             }
-            return selected_tooltip + ": " + selected_data + "%";
+            return selected_tooltip + ": " + selected_data;
             ;
         });
 
