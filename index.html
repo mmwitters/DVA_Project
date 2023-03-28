@@ -48,7 +48,7 @@
         .style("border-width", "1px")
         .style("border-radius", "5px")
         .style("padding", "10px")
-        .html(function ([d, selected_tooltip]) { //TODO: fix this -- only add to PoP variables
+        .html(function ([d, selected_tooltip]) {
             var selected_data = d.properties[selected_tooltip]
             if (selected_tooltip.includes("PoP") || selected_tooltip.includes("PoEP") || selected_tooltip.includes("PoH")
             || selected_tooltip.includes("PHU") || selected_tooltip.includes("POHU") || selected_tooltip.includes("PoW")
