@@ -25,7 +25,7 @@
 
 <script>
 
-    var width = 700
+    var width = 800
     var height = 600
 
     var chicagomap = d3.json("big_dataset_final_REV.geojson")
@@ -328,7 +328,7 @@
                 .style("border-width", "1px")
                 .style("border-radius", "5px")
                 .style("padding", "10px")
-                .html(function ([selected_var, selected_display]) { //TODO: fix this -- only add to PoP variables
+                .html(function ([selected_var, selected_display]) {
                     if (selected_var.includes("PoP") || selected_var.includes("PoEP") || selected_var.includes("PoH")
                         || selected_var.includes("PHU") || selected_var.includes("POHU") || selected_var.includes("PoW")
                         || selected_var.includes("PoF") || selected_var.includes("Percent") || selected_var.includes("Crime")) {
