@@ -21,7 +21,6 @@
 <body>
 
 <select id="colorDropdown"></select>
-<select id="tooltipDropdown"></select>
 
 <script>
 
@@ -133,20 +132,9 @@
                 return d;
             })
 
-        d3.select("#tooltipDropdown")
-            .selectAll('attributes')
-            .data(attributes)
-            .enter()
-            .append('option')
-            .text(function (d) {
-                return d;
-            })
-            .attr("value", function (d) {
-                return d;
-            })
-
         d3.select("#colorDropdown").on("change", function (d) {
             selected_color = d3.select(this).property("value")
+            selected_tooltip = d3.select(this).property("value")
             //console.log(selected_color)
 
             colorscale = d3.scaleQuantile()
@@ -162,13 +150,6 @@
 
             })
         })
-
-        d3.select("#tooltipDropdown").on("change", function (d) {
-            selected_tooltip = d3.select(this).property("value")
-            //svg.call(tip)
-            //console.log(selected_tooltip)
-        })
-
 
     })
 </script>
