@@ -63,7 +63,7 @@
 
     chicagomap.then(function (chi_map) {
 
-        var selected_color = "Gentrification Change 2010 to 2019"
+        var selected_color = "Gentrification Change 2010 to 2019" //TODO: try to set default on tooltip as well ?
 
         colorscale = d3.scaleQuantile()
             .domain([d3.min(chi_map.features, function (d) {
@@ -71,7 +71,7 @@
             }), d3.max(chi_map.features, function (d) {
                 return d.properties[selected_color];
             })])
-            .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]);
+            .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]); //TODO: expand color range
 
         var selected_tooltip = "Gentrification Change 2010 to 2019"
 
