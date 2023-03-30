@@ -63,7 +63,7 @@
 
     chicagomap.then(function (chi_map) {
 
-        var selected_color = "Full Census Tract"
+        var selected_color = "Gentrification Change 2010 to 2019"
 
         colorscale = d3.scaleQuantile()
             .domain([d3.min(chi_map.features, function (d) {
@@ -73,7 +73,7 @@
             })])
             .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]);
 
-        var selected_tooltip = "Full Census Tract"
+        var selected_tooltip = "Gentrification Change 2010 to 2019"
 
         var neighborhoods = svg.append("g")
 
