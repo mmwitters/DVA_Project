@@ -54,7 +54,7 @@
                 || selected_tooltip.includes("PoF") || selected_tooltip.includes("Percent") || selected_tooltip.includes("Crime")) {
                 return selected_tooltip + ": " + selected_data + "%";
             }
-            return selected_tooltip + ": " + selected_data;
+            return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data;
             ;
         });
 
