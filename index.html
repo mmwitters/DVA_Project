@@ -16,10 +16,9 @@
 
     <title></title>
 </head>
-
-
 <body>
 
+<h2>Variable:</h2>
 <select id="colorDropdown"></select>
 
 <script>
@@ -71,7 +70,7 @@
             }), d3.max(chi_map.features, function (d) {
                 return d.properties[selected_color];
             })])
-            .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]); //TODO: expand color range
+            .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]);
 
         var selected_tooltip = "Gentrification Change 2010 to 2019"
 
@@ -155,7 +154,9 @@
     })
 </script>
 
+<h2>Census Tract:</h2>
 <select id="censusDropdown"></select>
+<h2>Variable:</h2>
 <select id="varDropdown"></select>
 <br>
 <script>
