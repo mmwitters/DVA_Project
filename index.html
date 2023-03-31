@@ -10,12 +10,13 @@
     <script type="text/javascript" src="./lib/topojson.v2.min.js"></script>
 
     <style>
-    body {
-        font-family: sans-serif;
-    }
-    select {
-        font-family: inherit;
-    }
+        body {
+            font-family: sans-serif;
+        }
+
+        select {
+            font-family: inherit;
+        }
     </style>
 
     <title></title>
@@ -72,7 +73,7 @@
             .attr("id", "legend")
             .style("font-family", "sans-serif")
             .attr("transform", "translate(15,25) scale(0.6)");
-            //.attr("transform", "scale(0.8)");
+        //.attr("transform", "scale(0.8)");
 
         var selected_color = "Gentrification Change 2010 to 2019"
 
@@ -169,10 +170,10 @@
                 .range(["#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#08519c", "#08306b"]); //TODO: change back to 7 if needed
 
             legend = d3.legendColor()
-            .shape("circle")
-            .ascending(true)
-            .labelFormat(".02f")
-            .scale(colorscale);
+                .shape("circle")
+                .ascending(true)
+                .labelFormat(".02f")
+                .scale(colorscale);
 
             legend_ele.call(legend);
 
@@ -192,7 +193,7 @@
 <br>
 <script>
 
-    var margin = {top: 20, right: 30, bottom: 30, left: 40}
+    var margin = {top: 20, right: 30, bottom: 40, left: 70}
     var w = 760
     var h = 400
 
@@ -297,10 +298,34 @@
                 .attr("transform", `translate(${margin.left}, ${(h - margin.bottom)})`)
                 .call(xaxis);
 
+            x_axis.append("text")
+                .attr("y", margin.bottom - 1)
+                .attr("x", ((width - margin.left - margin.right) / 2))
+                .attr("id", "x_axis_label")
+                .attr("text-anchor", "end")
+                .attr("stroke", "black")
+                .attr("fill", "black")
+                .attr("font-size", "14px")
+                .style("font-family", "sans-serif")
+                .text("Year");
+
             var y_axis = svg2.append("g")
                 .attr("class", "y-axis")
                 .attr("transform", `translate(${margin.left}, ${(margin.top)})`)
                 .call(yaxis);
+
+            y_axis.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("x", -(h / 2) + margin.bottom)
+                .attr("y", margin.left-45)
+                .attr("id", "y_axis_label")
+                .attr("dy", "-5.1em")
+                .attr("text-anchor", "middle")
+                .attr("stroke", "black")
+                .attr("fill", "black")
+                .attr("font-size", "14px")
+                .style("font-family", "sans-serif")
+                .text(selected_var);
 
             var line = svg2.append("path")
                 .datum(data_subset)
