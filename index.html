@@ -64,6 +64,8 @@
 
     chicagomap.then(function (chi_map) {
 
+        var legend_ele = svg.append("g").attr("id", "legend")//.attr("transform", "translate(1000,10)");
+
         var selected_color = "Gentrification Change 2010 to 2019"
 
         colorscale = d3.scaleQuantile()
@@ -79,6 +81,12 @@
         var neighborhoods = svg.append("g")
 
         svg.call(tip)
+
+        var legend = d3.legendColor()
+            .labelFormat(".02f")
+            .scale(colorscale);
+
+        legend_ele.call(legend);
 
         var map = neighborhoods.selectAll('path')
             .data(chi_map.features)
@@ -126,7 +134,9 @@
             .data(attributes)
             .enter()
             .append('option')
-            .property("selected", function(d){ return d === selected_color; })
+            .property("selected", function (d) {
+                return d === selected_color;
+            })
             .text(function (d) {
                 return d;
             })
@@ -138,6 +148,7 @@
             selected_color = d3.select(this).property("value")
             selected_tooltip = d3.select(this).property("value")
             //console.log(selected_color)
+            d3.select(".legend").remove()
 
             colorscale = d3.scaleQuantile()
                 .domain([d3.min(chi_map.features, function (d) {
@@ -146,6 +157,12 @@
                     return d.properties[selected_color];
                 })])
                 .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]);
+
+            legend = d3.legendColor()
+                .labelFormat(".02f")
+                .scale(colorscale);
+
+            legend_ele.call(legend);
 
             map.style("fill", d => {
                 return colorscale(d.properties[selected_color]);
