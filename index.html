@@ -164,8 +164,10 @@
                 .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]);
 
             legend = d3.legendColor()
-                .labelFormat(".02f")
-                .scale(colorscale);
+            .shape("circle")
+            .ascending(true)
+            .labelFormat(".02f")
+            .scale(colorscale);
 
             legend_ele.call(legend);
 
