@@ -108,7 +108,7 @@
 
         var attributes = Object.keys(chi_map.features[0].properties)
 
-        attributes.pop() //removing Gentrification Status from drop-down
+        attributes.splice(0, 1) //removing Full Census Tract from drop-down
 
         var year_ind = attributes.indexOf('Year') //removing Year from drop-down and shading
         //console.log(year_ind)
