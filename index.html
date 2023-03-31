@@ -53,7 +53,7 @@
             if (selected_tooltip.includes("PoP") || selected_tooltip.includes("PoEP") || selected_tooltip.includes("PoH")
                 || selected_tooltip.includes("PHU") || selected_tooltip.includes("POHU") || selected_tooltip.includes("PoW")
                 || selected_tooltip.includes("PoF") || selected_tooltip.includes("Percent") || selected_tooltip.includes("Crime")) {
-                return selected_tooltip + ": " + selected_data + "%";
+                return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data + "%";
             }
             return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data;
             ;
