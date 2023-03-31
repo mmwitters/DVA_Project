@@ -64,7 +64,7 @@
 
     chicagomap.then(function (chi_map) {
 
-        var legend_ele = svg.append("g").attr("id", "legend")//.attr("transform", "translate(1000,10)");
+        var legend_ele = svg.append("g").attr("id", "legend").style("font-family", "sans-serif").attr("transform", "translate(600,40)");
 
         var selected_color = "Gentrification Change 2010 to 2019"
 
@@ -83,6 +83,8 @@
         svg.call(tip)
 
         var legend = d3.legendColor()
+            .shape("circle")
+            .ascending(true)
             .labelFormat(".02f")
             .scale(colorscale);
 
