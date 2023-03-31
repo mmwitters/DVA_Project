@@ -193,7 +193,7 @@
 <br>
 <script>
 
-    var margin = {top: 20, right: 30, bottom: 40, left: 70}
+    var margin = {top: 60, right: 30, bottom: 40, left: 70}
     var w = 760
     var h = 400
 
@@ -300,10 +300,10 @@
 
             x_axis.append("text")
                 .attr("y", margin.bottom - 1)
-                .attr("x", ((width - margin.left - margin.right) / 2))
+                .attr("x", ((w - margin.left - margin.right) / 2))
                 .attr("id", "x_axis_label")
                 .attr("text-anchor", "end")
-                .attr("stroke", "black")
+                //.attr("stroke", "black")
                 .attr("fill", "black")
                 .attr("font-size", "14px")
                 .style("font-family", "sans-serif")
@@ -317,15 +317,27 @@
             y_axis.append("text")
                 .attr("transform", "rotate(-90)")
                 .attr("x", -(h / 2) + margin.bottom)
-                .attr("y", margin.left-45)
+                .attr("y", margin.left - 45)
                 .attr("id", "y_axis_label")
                 .attr("dy", "-5.1em")
                 .attr("text-anchor", "middle")
-                .attr("stroke", "black")
+                //.attr("stroke", "black")
                 .attr("fill", "black")
                 .attr("font-size", "14px")
                 .style("font-family", "sans-serif")
                 .text(selected_var);
+
+            var title = svg2.append("text")
+                .attr("transform", "translate(100,0)")
+                .attr("x", ((w - margin.left - margin.right-45) / 2))
+                .attr("y", margin.top-20)
+                .attr("id", "line_chart_title")
+                .attr("text-anchor", "middle")
+                .attr("stroke", "black")
+                .attr("fill", "black")
+                .attr("font-size", "16px")
+                .style("font-family", "sans-serif")
+                .text("Trends Over Time");
 
             var line = svg2.append("path")
                 .datum(data_subset)
@@ -417,6 +429,7 @@
             d3.select(".y-axis").remove()
             d3.select(".curr-line").remove()
             d3.select("#circles").remove()
+            d3.select("#line_chart_title").remove()
 
             create_linechart(census, variable, filtered_data)
 
@@ -434,6 +447,7 @@
             d3.select(".y-axis").remove()
             d3.select(".curr-line").remove()
             d3.select("#circles").remove()
+            d3.select("#line_chart_title").remove()
 
             create_linechart(census, variable, filtered_data)
         })
