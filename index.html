@@ -78,7 +78,7 @@
             }), d3.max(chi_map.features, function (d) {
                 return d.properties[selected_color];
             })])
-            .range(["#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#08519c", "#08306b"]);
+            .range(["#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#08519c", "#08306b"]); //TODO: change back to 7 if needed
 
         var selected_tooltip = "Gentrification Change 2010 to 2019"
 
@@ -162,7 +162,7 @@
                 }), d3.max(chi_map.features, function (d) {
                     return d.properties[selected_color];
                 })])
-                .range(["#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#08519c", "#08306b"]);
+                .range(["#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#08519c", "#08306b"]); //TODO: change back to 7 if needed
 
             legend = d3.legendColor()
             .shape("circle")
