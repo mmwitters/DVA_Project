@@ -129,8 +129,25 @@
         attributes.splice(0, 1) //removing Full Census Tract from drop-down
 
         var year_ind = attributes.indexOf('Year') //removing Year from drop-down and shading
-        //console.log(year_ind)
         attributes.splice(year_ind, 1)
+
+        var cnt_ind = attributes.indexOf('COUNTY')
+        attributes.splice(cnt_ind, 1)
+
+        var cntf_ind = attributes.indexOf('COUNTYFIPS')
+        attributes.splice(cntf_ind, 1)
+
+        var sfips_ind = attributes.indexOf('STATEFIPS')
+        attributes.splice(sfips_ind, 1)
+
+        var state_ind = attributes.indexOf('STATE')
+        attributes.splice(state_ind, 1)
+
+        var rg_ind = attributes.indexOf('REGION')
+        attributes.splice(rg_ind, 1)
+
+        var r_ind = attributes.indexOf('TERRITORY')
+        attributes.splice(r_ind, 1)
 
         var p_ind = attributes.indexOf("Primary Rural-Urban Commuting Area Code 2010")
         attributes.splice(p_ind, 1)
