@@ -78,7 +78,7 @@
             }), d3.max(chi_map.features, function (d) {
                 return d.properties[selected_color];
             })])
-            .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]);
+            .range(["#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#08519c", "#08306b"]);
 
         var selected_tooltip = "Gentrification Change 2010 to 2019"
 
@@ -103,7 +103,7 @@
                 return colorscale(d.properties[selected_color]);
             })
             .style("stroke-width", 0.3)
-            .style("stroke", "white")
+            .style("stroke", "grey") //TODO: switch back to white if only using 7 colors
             .on('mouseover', function (d) {
                 tip.show([d, selected_tooltip]);
 
@@ -117,7 +117,7 @@
 
                 d3.select(this)
                     .style("opacity", 1)
-                    .style("stroke", "white")
+                    .style("stroke", "grey") //TODO: switch back to white if only using 7 colors
                     .style("stroke-width", 0.3);
             });
 
@@ -162,7 +162,7 @@
                 }), d3.max(chi_map.features, function (d) {
                     return d.properties[selected_color];
                 })])
-                .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]);
+                .range(["#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#08519c", "#08306b"]);
 
             legend = d3.legendColor()
             .shape("circle")
