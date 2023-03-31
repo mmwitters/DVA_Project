@@ -55,9 +55,7 @@
         .style("font-size", "14px")
         .html(function ([d, selected_tooltip]) {
             var selected_data = d.properties[selected_tooltip]
-            if (selected_tooltip.includes("PoP") || selected_tooltip.includes("PoEP") || selected_tooltip.includes("PoH")
-                || selected_tooltip.includes("PHU") || selected_tooltip.includes("POHU") || selected_tooltip.includes("PoW")
-                || selected_tooltip.includes("PoF") || selected_tooltip.includes("Percent") || selected_tooltip.includes("Crime")) {
+            if (selected_tooltip.includes("%") || selected_tooltip.includes("Crime")) {
                 return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data + "%";
             }
             return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data;
@@ -388,9 +386,7 @@
                 .style("border-radius", "5px")
                 .style("padding", "10px")
                 .html(function ([selected_var, selected_display]) {
-                    if (selected_var.includes("PoP") || selected_var.includes("PoEP") || selected_var.includes("PoH")
-                        || selected_var.includes("PHU") || selected_var.includes("POHU") || selected_var.includes("PoW")
-                        || selected_var.includes("PoF") || selected_var.includes("Percent") || selected_var.includes("Crime")) {
+                    if (selected_var.includes("%")) {
                         return selected_display + "%";
                     }
                     return selected_display;
