@@ -18,7 +18,7 @@
 </head>
 <body>
 
-<h2>Variable:</h2>
+<h2 style="font-family: sans-serif">Variable:</h2>
 <select id="colorDropdown"></select>
 
 <script>
@@ -46,6 +46,8 @@
         .style("border-width", "1px")
         .style("border-radius", "5px")
         .style("padding", "10px")
+        .style("font-family", "sans-serif")
+        .style("font-size", "14px")
         .html(function ([d, selected_tooltip]) {
             var selected_data = d.properties[selected_tooltip]
             if (selected_tooltip.includes("PoP") || selected_tooltip.includes("PoEP") || selected_tooltip.includes("PoH")
@@ -154,9 +156,9 @@
     })
 </script>
 
-<h2>Census Tract:</h2>
+<h2 style="font-family: sans-serif">Census Tract:</h2>
 <select id="censusDropdown"></select>
-<h2>Variable:</h2>
+<h2 style="font-family: sans-serif">Variable:</h2>
 <select id="varDropdown"></select>
 <br>
 <script>
