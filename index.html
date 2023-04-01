@@ -29,13 +29,13 @@
 <script>
 
     var width = 800
-    var height = 500
+    var height = 450
 
     var chicagomap = d3.json("big_dataset_final4.geojson")
 
     var svg = d3.select("body").append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("viewBox", "0 0 " + width + " " + height)
+        .attr("viewBox", "0 60 " + width + " " + height)
         .classed("svg-content", true);
 
     var projection = d3.geoMercator()
@@ -70,7 +70,7 @@
         var legend_ele = svg.append("g")
             .attr("id", "legend")
             .style("font-family", "sans-serif")
-            .attr("transform", "translate(15,25) scale(0.6)");
+            .attr("transform", "translate(15,80) scale(0.6)");
         //.attr("transform", "scale(0.8)");
 
         var selected_color = "Gentrification Change 2010 to 2019"
