@@ -56,12 +56,12 @@
         .html(function ([d, selected_tooltip]) {
             var selected_data = d.properties[selected_tooltip]
             if (selected_tooltip.includes("%") || selected_tooltip.includes("Crime")) {
-                return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data + "%";
+                return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data.toLocaleString() + "%";
             }
             else if (selected_tooltip.includes("$")){
-                return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": $" + selected_data;
+                return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": $" + selected_data.toLocaleString();
             }
-            return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data;
+            return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data.toLocaleString();
             ;
         });
 
@@ -412,12 +412,12 @@
                 .style("padding", "10px")
                 .html(function ([selected_var, selected_display]) {
                     if (selected_var.includes("%")) {
-                        return selected_display + "%";
+                        return selected_display.toLocaleString() + "%";
                     }
                     else if (selected_var.includes("$")){
-                        return "$" + selected_display
+                        return "$" + selected_display.toLocaleString()
                     }
-                    return selected_display;
+                    return selected_display.toLocaleString();
                     ;
                 });
 
