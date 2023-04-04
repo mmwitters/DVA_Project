@@ -57,11 +57,9 @@
             var selected_data = d.properties[selected_tooltip]
             if (selected_tooltip.includes("%") || selected_tooltip.includes("Crime")) {
                 return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data.toLocaleString() + "%";
-            }
-            else if (selected_tooltip.includes("$")){
+            } else if (selected_tooltip.includes("$")) {
                 return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": $" + selected_data.toLocaleString();
-            }
-            else if (selected_tooltip.includes("Median Year")){
+            } else if (selected_tooltip.includes("Median Year")) {
                 return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data;
             }
             return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data.toLocaleString();
@@ -72,7 +70,6 @@
 
 
     chicagomap.then(function (chi_map) {
-
         var legend_ele = svg.append("g")
             .attr("id", "legend")
             .style("font-family", "sans-serif")
@@ -187,28 +184,37 @@
             //console.log(selected_color)
             d3.select(".legend").remove()
 
-            colorscale = d3.scaleQuantile()
-                .domain([d3.min(chi_map.features, function (d) {
-                    return d.properties[selected_color];
-                }), d3.max(chi_map.features, function (d) {
-                    return d.properties[selected_color];
-                })])
-                .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]);
+            function getColor(d) {
+                return d.includes("Rideshare") ? d3.scaleThreshold()
+                        .domain([2000, 8000, 25000, 100000, 250000, 1000000])
+                        .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]) :
+                    d.includes("Population Density") ? d3.scaleThreshold()
+                            .domain([2000, 5000, 10000, 20000, 30000, 50000])
+                            .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]) :
+                        d3.scaleQuantile()
+                            .domain([d3.min(chi_map.features, function (d) {
+                                return d.properties[selected_color];
+                            }), d3.max(chi_map.features, function (d) {
+                                return d.properties[selected_color];
+                            })])
+                            .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"])
+            };
+
+            colorscale = getColor(selected_color);
 
             legend = d3.legendColor()
                 .shape("circle")
                 .ascending(true)
                 .labelFormat(".02f")
+                .labels(d3.legendHelpers.thresholdLabels)
                 .scale(colorscale);
 
             legend_ele.call(legend);
 
             map.style("fill", d => {
                 return colorscale(d.properties[selected_color]);
-
             })
         })
-
     })
 </script>
 
@@ -254,7 +260,7 @@
         var sec_ind = variables.indexOf("Secondary Rural-Urban Commuting Area Code 2010")
         variables.splice(sec_ind, 1)
 
-        var la_ind = variables.indexOf("Land Area in Square Miles")
+        var la_ind = variables.indexOf("Land Area (Sq Miles)")
         variables.splice(la_ind, 1)
 
         d3.select("#censusDropdown")
@@ -357,8 +363,8 @@
 
             var title = svg2.append("text")
                 .attr("transform", "translate(100,0)")
-                .attr("x", ((w - margin.left - margin.right-45) / 2))
-                .attr("y", margin.top-20)
+                .attr("x", ((w - margin.left - margin.right - 45) / 2))
+                .attr("y", margin.top - 20)
                 .attr("id", "line_chart_title")
                 .attr("text-anchor", "middle")
                 .attr("stroke", "black")
@@ -416,11 +422,9 @@
                 .html(function ([selected_var, selected_display]) {
                     if (selected_var.includes("%")) {
                         return selected_display.toLocaleString() + "%";
-                    }
-                    else if (selected_var.includes("$")){
+                    } else if (selected_var.includes("$")) {
                         return "$" + selected_display.toLocaleString();
-                    }
-                    else if (selected_var.includes("Median Year")){
+                    } else if (selected_var.includes("Median Year")) {
                         return selected_display;
                     }
                     return selected_display.toLocaleString();
