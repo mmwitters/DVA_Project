@@ -58,6 +58,9 @@
             if (selected_tooltip.includes("%") || selected_tooltip.includes("Crime")) {
                 return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data + "%";
             }
+            else if (selected_tooltip.includes("$")){
+                return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": $" + selected_data;
+            }
             return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data;
             ;
         });
@@ -410,6 +413,9 @@
                 .html(function ([selected_var, selected_display]) {
                     if (selected_var.includes("%")) {
                         return selected_display + "%";
+                    }
+                    else if (selected_var.includes("$")){
+                        return "$" + selected_display
                     }
                     return selected_display;
                     ;
