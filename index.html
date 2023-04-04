@@ -95,6 +95,7 @@
             .shape("circle")
             .ascending(true)
             .labelFormat(".02f")
+            .labels(d3.legendHelpers.thresholdLabels)
             .scale(colorscale);
 
         legend_ele.call(legend);
