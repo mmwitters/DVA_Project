@@ -61,6 +61,9 @@
             else if (selected_tooltip.includes("$")){
                 return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": $" + selected_data.toLocaleString();
             }
+            else if (selected_tooltip.includes("Median Year")){
+                return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data;
+            }
             return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data.toLocaleString();
             ;
         });
@@ -415,7 +418,10 @@
                         return selected_display.toLocaleString() + "%";
                     }
                     else if (selected_var.includes("$")){
-                        return "$" + selected_display.toLocaleString()
+                        return "$" + selected_display.toLocaleString();
+                    }
+                    else if (selected_var.includes("Median Year")){
+                        return selected_display;
                     }
                     return selected_display.toLocaleString();
                     ;
