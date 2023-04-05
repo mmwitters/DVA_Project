@@ -83,7 +83,7 @@
             }), d3.max(chi_map.features, function (d) {
                 return d.properties[selected_color];
             })])
-            .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]);
+            .range(['#b2182b', '#ef8a62', '#fddbc7', '#f7f7f7', '#d1e5f0', '#67a9cf', '#2166ac']);
 
         var selected_tooltip = "Gentrification Change 2010 to 2019"
 
@@ -192,13 +192,20 @@
                     d.includes("Population Density") ? d3.scaleThreshold()
                             .domain([2000, 5000, 10000, 20000, 30000, 50000])
                             .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]) :
-                        d3.scaleQuantile()
-                            .domain([d3.min(chi_map.features, function (d) {
-                                return d.properties[selected_color];
-                            }), d3.max(chi_map.features, function (d) {
-                                return d.properties[selected_color];
-                            })])
-                            .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"])
+                        (d.includes("Change") || d.includes("change")) ? d3.scaleQuantile()
+                                .domain([d3.min(chi_map.features, function (d) {
+                                    return d.properties[selected_color];
+                                }), d3.max(chi_map.features, function (d) {
+                                    return d.properties[selected_color];
+                                })])
+                                .range(['#b2182b', '#ef8a62', '#fddbc7', '#f7f7f7', '#d1e5f0', '#67a9cf', '#2166ac']) :
+                            d3.scaleQuantile()
+                                .domain([d3.min(chi_map.features, function (d) {
+                                    return d.properties[selected_color];
+                                }), d3.max(chi_map.features, function (d) {
+                                    return d.properties[selected_color];
+                                })])
+                                .range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"])
             };
 
             colorscale = getColor(selected_color);
