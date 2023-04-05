@@ -31,7 +31,7 @@
     var width = 800
     var height = 450
 
-    var chicagomap = d3.json("big_dataset_final4.geojson")
+    var chicagomap = d3.json("big_dataset_final.geojson")
 
     var svg = d3.select("body").append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
@@ -230,7 +230,7 @@
     var w = 760
     var h = 400
 
-    var sdoh = d3.csv("sdoh_2009_2019_final2.csv", d3.autoType);
+    var sdoh = d3.csv("sdoh_2009_2019_final.csv", d3.autoType);
     //console.log(sdoh)
 
     var svg2 = d3.select("body")
