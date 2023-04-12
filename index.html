@@ -62,6 +62,9 @@
             } else if (selected_tooltip.includes("Median Year")) {
                 return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data;
             }
+            else if (selected_tooltip.includes("Gentrification")) {
+                return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data;
+            }
             return "Census Tract: " + d.properties["Full Census Tract"] + "<br>" + selected_tooltip + ": " + selected_data.toLocaleString();
             ;
         });
